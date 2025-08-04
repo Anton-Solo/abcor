@@ -27,12 +27,12 @@ function handleFormSubmit(event) {
         isValid = false;
     }
     
-    const phoneValue = phone.value.trim();
+    const phoneValue = phone.value.replace(/\D/g, '');
     if (!phoneValue) {
         showError('phone', 'Phone number is required');
         isValid = false;
-    } else if (!phoneValue.startsWith('+')) {
-        showError('phone', 'Phone number must include area code and be 10 digits.');
+    } else if (phoneValue.length !== 10) {
+        showError('phone', 'Phone number must be 10 digits');
         isValid = false;
     }
     
@@ -158,3 +158,30 @@ function closeModalFunc() {
         document.body.style.overflow = 'auto';
     }
 }
+
+// Format phone number as (123) 456-7890
+function formatPhoneNumber(input) {
+    let numbers = input.value.replace(/\D/g, '');
+    let formatted = '';
+    
+    if (numbers.length > 0) {
+        formatted = '(' + numbers.substring(0, 3);
+        if (numbers.length > 3) {
+            formatted += ') ' + numbers.substring(3, 6);
+        }
+        if (numbers.length > 6) {
+            formatted += '-' + numbers.substring(6, 10);
+        }
+    }
+    
+    input.value = formatted;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+    }
+});

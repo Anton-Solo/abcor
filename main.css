@@ -60,7 +60,7 @@
       font-size: 24px;
       font-weight: 700;
       line-height: 26px;
-      margin-bottom: 10px;
+      margin-bottom: 25px;
   }
   
   .text {
@@ -95,17 +95,17 @@
   .content-section-wrapper {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(526px, 1fr));
-      justify-items: center;
+      justify-items: stretch;
       gap: 30px;
       max-width: 1200px;
       margin: 0 auto;
   }
   
   .card {
+
       background-color: var(--color-white);
       padding: 40px;
       border-radius: 14px;
-      max-width: 588px;
       box-shadow: 0 4px 39px var(--color-shadow);
   }
   
